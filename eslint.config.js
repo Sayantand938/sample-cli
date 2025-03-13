@@ -1,8 +1,10 @@
+// eslint.config.js
 import js from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
 import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
+import globals from 'globals'; // Import the globals package
 
 export default [
   // Base configuration (ESLint recommended rules)
@@ -18,8 +20,7 @@ export default [
         sourceType: 'module',
       },
       globals: {
-        process: 'readonly', // Define 'process' as a global variable
-        console: 'readonly', // Define 'console' as a global variable
+        ...globals.node, // Use globals.node for Node.js environments
       },
     },
     plugins: {
@@ -31,6 +32,7 @@ export default [
       'prettier/prettier': 'error',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
+      'no-undef': 'off', // Turn off no-undef, since we're defining globals now
     },
   },
 
